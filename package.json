@@ -10,5 +10,8 @@
     "test": "mocha"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^7.6.0"
+  }
 }
