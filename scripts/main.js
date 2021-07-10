@@ -1,41 +1,90 @@
 document.addEventListener('DOMContentLoaded', () => {
-    var grid = document.getElementById("grid")
-    for(i=1; i<10; i++){
-        div = document.createElement("div")
-        div.id = i
-        div.setAttribute("class", "cell")
-        grid.appendChild(div)
-    }
-    red_cells = document.getElementsByClassName("red")
-    if(red_cells.length == 0){
+    var gameGrid = document.getElementById("grid")
+    let gridSize = 3
+    createGrid()
+    redCells = document.getElementsByClassName("red")
+    if(redCells.length == 0){
         player = "initial"
-        console.log(red_cells.length)
-    } 
+        console.log(redCells.length)
+    }
+    function gridRange(length){
+        return [1, length + 1]
+    }
+    function createGrid(){
+        grid = gridRange(gridSize)
+        for(x=grid[0]; x<grid[1]; x++){
+            for(y=grid[0]; y<grid[1]; y++){
+                div = document.createElement("div")
+                div.id = `${y}${x}`
+                div.setAttribute("class", "cell")
+                gameGrid.appendChild(div)
+            }
+        }
+    }
     
 
     window.onclick = event => {
+        redCells = document.getElementsByClassName("red")
         if(event.target.classList.contains("cell")){
             player = colorCell(player, event.target)
         }
-        console.log(player)
+        if(redCells.length > gridSize - 1){
+            setTimeout(checkForWinner, 150)
+        }
     }
 
    
-
-
     function colorCell(player, cell){
-        if(player == "red" || player == "initial"){
-            cell.classList.add("red")
-            player = "blue"
-            console.log("red turn", player)   
-        } else {
-            console.log("blue turn")
-            cell.classList.add('blue')
-            player = "red"
+        if(!cell.classList.contains('taken')){
+            if((player == "red" || player == "initial")){
+                cell.classList.add("red")
+                cell.classList.add('taken')
+                player = "blue"  
+            } else {
+                cell.classList.add('blue')
+                cell.classList.add('taken')
+                player = "red"
+                console.log(player)
+            }
         }
 
         return player
     }
 
 
+    function checkForWinner(){
+        redCells = document.getElementsByClassName("red")
+        blueCells = document.getElementsByClassName("blue")
+        winner = checkForRedWinner()
+        return winner
+    }
+
+
+    function checkForRedWinner(){
+        grid = gridRange(gridSize)
+        for(i=grid[0]; i<grid[1]; i++){
+            completeRedRow = 0
+            completeRedColumn = 0
+            completeBlueRow = 0
+            completeBlueColumn = 0
+            for(j=grid[0]; j<grid[1]; j++){
+                rowCell = document.getElementById(`${i}${j}`)
+                columnCell = document.getElementById(`${j}${i}`)
+                if(rowCell.classList.contains('red')){completeRedRow += 1}
+                if(rowCell.classList.contains('blue')){completeBlueRow += 1}
+                if(columnCell.classList.contains('red')){completeRedColumn += 1}
+                if(columnCell.classList.contains('blue')){completeBlueColumn += 1}
+            }
+            if(completeRedRow == gridSize || completeRedColumn == gridSize){
+                alert("Red Wins")
+                return location.reload()
+            } else if(completeBlueRow == gridSize || completeBlueColumn == gridSize){
+                alert("Blue Wins")
+                return location.reload()
+            } 
+        }
+
+    }
+
 })
+

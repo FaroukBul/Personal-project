@@ -1,8 +1,5 @@
 var assert = require('assert'); 
 var Gato = require("../scripts/main.js")
-let testGato = new Gato(
-
-)
 
 describe('Array', function() {
   describe('#indexOf()', function() {
@@ -18,11 +15,9 @@ function testTest(){
 }
 it("test-test", testTest)
 
-function colorCell(){
-  
-  gato.colorCell(cell)
-  cell_color = cell.classList
+function testForWinner() {
 
-  assert.equal(cell_color, "red")
 }
-it("color-cell-test", colorCell)
+it("Should return string 'Red Wins' given array of winning positions", testForWinner)
+
+
