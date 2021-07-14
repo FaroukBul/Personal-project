@@ -1,16 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
-    var gameGrid = document.getElementById("grid")
     let gridSize = 3
-    createGrid()
+    createGrid(gridSize)
     redCells = document.getElementsByClassName("red")
     if(redCells.length == 0){
         player = "initial"
-        console.log(redCells.length)
     }
     function gridRange(length){
         return [1, length + 1]
     }
-    function createGrid(){
+    function createGrid(gridSize){
+        var gameGrid = document.getElementById("grid")
         grid = gridRange(gridSize)
         for(x=grid[0]; x<grid[1]; x++){
             for(y=grid[0]; y<grid[1]; y++){
@@ -21,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
-    
+
 
     window.onclick = event => {
         redCells = document.getElementsByClassName("red")
@@ -44,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 cell.classList.add('blue')
                 cell.classList.add('taken')
                 player = "red"
-                console.log(player)
             }
         }
 
@@ -54,11 +52,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function checkForWinner(){
         redCells = document.getElementsByClassName("red")
-        blueCells = document.getElementsByClassName("blue")
-        checkForLineWinner()
-        checkForDiagonalWinner()
-        determineGameOver(redCells)
-        return winner
+        let winner = checkForLineWinner()
+        if(winner) alertResult(winner)
+        if(!winner){
+            winner = checkForDiagonalWinner()
+           if(winner) alertResult(winner)  
+        }
+        if(!winner){
+            winner = determineGameOver(redCells)
+            if(winner) alertResult(winner)
+        }
     }
 
 
@@ -78,18 +81,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(columnCell.classList.contains('blue')){completeBlueColumn += 1}
             }
             if(completeRedRow == gridSize || completeRedColumn == gridSize){
-                alertResult("Red")
+            
+                return "Red"
             } else if(completeBlueRow == gridSize || completeBlueColumn == gridSize){
-                alertResult("Blue")
-            } 
+    
+                return "Blue"
+            }
         }
 
     }
 
     function checkForDiagonalWinner(){
-        if(!checkForRightDiagonal()){
-            checkForLeftDiagonal()
+        winner = checkForRightDiagonal()
+        if(!winner){
+            winner = checkForLeftDiagonal()
         }
+        return winner
     }
 
 
@@ -105,12 +112,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if(diagonal.classList.contains('blue')){rightBlueDiagonal += 1}
         }
         if(rightRedDiagonal == gridSize){
-            return alertResult("Red")
-        } else if(rightBlueDiagonal == gridSize){
-            return alertResult("Blue")
-        }
 
-        return null
+            return "Red"
+        } else if(rightBlueDiagonal == gridSize){
+
+            return "Blue"
+        }
     }
 
     function checkForLeftDiagonal(){
@@ -121,14 +128,15 @@ document.addEventListener('DOMContentLoaded', () => {
         for(x=gridSize; x>0; x -= 1){
             y++
             diagonal = document.getElementById(`${x}${y}`)
-            console.log(diagonal, x, y, "hello")
             if(diagonal.classList.contains('red')){leftRedDiagonal += 1}
             if(diagonal.classList.contains('blue')){leftBlueDiagonal += 1}
         }
         if(leftRedDiagonal == gridSize){
-            return alertResult("Red")
+
+            return "Red"
         } else if(leftBlueDiagonal == gridSize){
-            return alertResult("Blue")
+
+            return "Blue"
         }
     }
 
@@ -138,26 +146,29 @@ document.addEventListener('DOMContentLoaded', () => {
         if(gridSize % 2 == 0){
             maxMoves = (gridSize * gridSize)/2 + 1
             if(playerOneMoves == maxMoves){
-                 return alertResult()
+
+                 return "Tie"
             }
         } else{
             maxMoves = (gridSize * gridSize)/2 + 0.5
             if(playerOneMoves == maxMoves){
-               return alertResult()
+
+               return "Tie"
             }
         }
-        return null
     }
 
 
     function alertResult(winner){
-        if(winner){
-            alert(winner + " Wins") 
-            return location.reload()
-        } else{
-            alert("It's a tie")
+        if(winner == "Tie"){
+            alert("It's a tie") 
+
             return location.reload()
         }
+        alert(winner + " Wins")
+
+        return location.reload()
+        
     }
 
     

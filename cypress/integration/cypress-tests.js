@@ -34,13 +34,11 @@ describe('Test for getWinner function', () => {
     cy.get('#12').click()
     cy.get('#33').click()
   })
-})
 
-describe('Test for winning actions', () => {
-  it('Check for alert "Red Wins" given column of reds', () => {
+  it('Check for alert "Red" given column of reds', () => {
     const stub = cy.stub()
     cy.on('window:alert', (text) => {
-      expect(text).to.contains('Red Wins');
+      expect(text).to.contains('This');
     })
   })
 })
@@ -58,5 +56,11 @@ describe('Test for winning actions', () => {
     cy.on('window:alert', (text) => {
       expect(text).to.contains('Blue Wins')
     })
+  })
+})
+
+describe('Test for tie', () => {
+  it("Check for alert 'It's a tie' given no winning lines", () =>{
+
   })
 })
