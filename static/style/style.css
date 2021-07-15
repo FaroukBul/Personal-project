@@ -1,3 +1,22 @@
+nav{
+    display: flex;
+    justify-content: space-evenly;
+    border: 1px solid rgba(0, 110, 42, 0.835);
+    margin-top: none;
+    background-color: rgba(211, 211, 211, 0.486);
+    padding: 0.7em;
+}
+a{
+    text-decoration: none;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.3em;
+}
+a:link{
+    color: rgb(0, 177, 153);
+}
+a:hover {
+    color: rgb(4, 135, 211);
+  }
 
 #grid{
     display: grid;
@@ -11,9 +30,11 @@
 }
 
 .red{
-    background-color: rgb(255, 0, 0);
+    background-image: url("https://media.istockphoto.com/vectors/red-handwritten-brush-isolated-vector-id620376638?k=6&m=620376638&s=612x612&w=0&h=Xhm7hMklsFHhnPYOE7Bz7ZxLjN4xOijqyIZkXgDUrao=");
+    background-size: cover;
 }
 
 .blue{
-    background-color: rgb(0, 0, 255);
+    background-image: url("https://i.pinimg.com/736x/48/41/9e/48419e1d38b4fcf8c887d9f38aba742a.jpg");
+    background-size: cover;
 }
