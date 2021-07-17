@@ -1,4 +1,4 @@
-import {checkForLineWinner, gridRange} from './winner.js';
+import {Winner, gridRange, alertWinner} from './winner.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     let gridSize = 3
@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if(redCells.length == 0){
         var player = "initial"
     }
+
+
     function createGrid(gridSize){
         var gameGrid = document.getElementById("grid")
         let grid = gridRange(gridSize)
@@ -27,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             player = gato.colorCell()
             if(redCells.length > gridSize - 1){
                 setTimeout(alertWinner(gato.getWinner()), 1000)
+                location.reload()
             }
         }
     }
@@ -55,19 +58,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         getWinner(){
-            // check for winner method of winner class, better than separate functions because then you dont need to keep passing the same arguments. You set up a class per time you check for winner.
-            return checkForLineWinner(this.length)
+            let winner = new Winner(this.length, this.redCells)
+            this.winner = winner.checkForWinner()
+            return this.winner
         }
 
-
-
-
-    }
-
-    function alertWinner(winner){
-        if(winner){
-            alert(winner + " Wins")
-        }
     }
 
 })
