@@ -1,3 +1,4 @@
+import {checkForLineWinner, gridRange} from './winner.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     let gridSize = 3
@@ -5,9 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let redCells = document.getElementsByClassName("red")
     if(redCells.length == 0){
         var player = "initial"
-    }
-    function gridRange(length){
-        return [1, length + 1]
     }
     function createGrid(gridSize){
         var gameGrid = document.getElementById("grid")
@@ -22,15 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-
     window.onclick = event => {
         redCells = document.getElementsByClassName("red")
         if(event.target.classList.contains("cell")){
             let gato = new Gato(gridSize, event.target, player, redCells)
             player = gato.colorCell()
             if(redCells.length > gridSize - 1){
-                alertWinner(gato.checkForLineWinner())
-                setTimeout(alertWinner(gato.checkForLineWinner()), 150)
+                setTimeout(alertWinner(gato.getWinner()), 1000)
             }
         }
     }
@@ -59,32 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         getWinner(){
-            return this.winner
+            // check for winner method of winner class, better than separate functions because then you dont need to keep passing the same arguments. You set up a class per time you check for winner.
+            return checkForLineWinner(this.length)
         }
 
-        checkForLineWinner = () => {
-            let grid = gridRange(length)
-            for(let i=grid[0]; i<grid[1]; i++){
-                let completeRedRow = 0
-                let completeRedColumn = 0
-                let completeBlueRow = 0
-                let completeBlueColumn = 0
-                for(let j=grid[0]; j<grid[1]; j++){
-                    let rowCell = document.getElementById(`${i}${j}`)
-                    let columnCell = document.getElementById(`${j}${i}`)
-                    if(rowCell.classList.contains('red')){completeRedRow += 1}
-                    if(rowCell.classList.contains('blue')){completeBlueRow += 1}
-                    if(columnCell.classList.contains('red')){completeRedColumn += 1}
-                    if(columnCell.classList.contains('blue')){completeBlueColumn += 1}
-                }
-                if(completeRedRow == gridSize || completeRedColumn == gridSize){
-                    return "Red"
-                } else if(completeBlueRow == gridSize || completeBlueColumn == gridSize){
-                    return "Blue"
-                    
-                }
-            }
-        }
+
 
 
     }
@@ -95,8 +70,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    
-    
-
 })
+
+
+
+
+
 

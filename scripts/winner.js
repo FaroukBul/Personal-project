@@ -1,3 +1,7 @@
+
+function gridRange(length){
+    return [1, length + 1]
+}
 function checkForWinner(){
     redCells = document.getElementsByClassName("red")
     let winner = checkForLineWinner()
@@ -94,3 +98,31 @@ function alertResult(winner){
     return location.reload()
     
 }
+
+
+function checkForLineWinner(length) {
+    let grid = gridRange(length)
+    console.log(grid)
+    for(let i=grid[0]; i<grid[1]; i++){
+        let completeRedRow = 0
+        let completeRedColumn = 0
+        let completeBlueRow = 0
+        let completeBlueColumn = 0
+        for(let j=grid[0]; j<grid[1]; j++){
+            let rowCell = document.getElementById(`${i}${j}`)
+            let columnCell = document.getElementById(`${j}${i}`)
+            if(rowCell.classList.contains('red')){completeRedRow += 1}
+            if(rowCell.classList.contains('blue')){completeBlueRow += 1}
+            if(columnCell.classList.contains('red')){completeRedColumn += 1}
+            if(columnCell.classList.contains('blue')){completeBlueColumn += 1}
+        }
+        if(completeRedRow == length || completeRedColumn == length){
+            return "Red"
+        } else if(completeBlueRow == glength || completeBlueColumn == length){
+            return "Blue"
+            
+        }
+    }
+}
+
+export {checkForLineWinner, gridRange}
