@@ -21,4 +21,10 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    from .views import home
+    app.register_blueprint(home.bp)
+
+    from .views import gato
+    app.register_blueprint(gato.bp)
+
     return app

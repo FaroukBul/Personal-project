@@ -3,9 +3,12 @@ from flask import (
 )
 
 
-bp = Blueprint("gato", __name__, prefix="/gato")
+bp = Blueprint("gato", __name__,url_prefix="/gato")
 
 
 @bp.route("/game")
 def game():
-    pass
+    
+    return render_template(
+        "gato/game.html"
+    )

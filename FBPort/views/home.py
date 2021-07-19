@@ -8,4 +8,7 @@ bp = Blueprint("home", __name__)
 
 @bp.route("/")
 def main_page():
-    pass
+    
+    return render_template(
+        "home/main_page.html"
+    )
