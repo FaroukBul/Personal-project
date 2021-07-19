@@ -10,5 +10,7 @@ bp = Blueprint("gato", __name__,url_prefix="/gato")
 def game():
     
     return render_template(
-        "gato/game.html"
+        "gato/game.html",
+        grid_length=3,
+        range=range
     )
