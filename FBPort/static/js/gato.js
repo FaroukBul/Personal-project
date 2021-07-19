@@ -1,18 +1,29 @@
 
 
-class Gato{
+class Gato {
 
-    consturctor(gridLength){
+    constructor(gridLength) {
         this.gridLength = gridLength
         this.currentPlayer = 1
+    };
+
+    markCell(cell) {
+        if(!cell.classList.contains("marked-cell")){
+            cell.classList.add("player-" + this.currentPlayer)
+            cell.classList.add("marked-cell")
+        }
+        this.changeCurrentPlayer()
     }
 
-    markCell(cell){
-        if(!cell.className.contains("player")){
-            cell.classList.add("player-" + this.player)
+    changeCurrentPlayer() {
+        if (this.currentPlayer == 1) {
+            this.currentPlayer = 2
+        }
+        else {
+            this.currentPlayer = 1
         }
     }
 }
 
 
-export {Gato}
+export {Gato};

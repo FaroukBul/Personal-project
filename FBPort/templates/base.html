@@ -7,7 +7,7 @@
     <title>{% block title %}{% endblock %} - FBPort</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style-gato.css') }}">
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
 </head>
 
 {% include "nav-bar.html" %}
