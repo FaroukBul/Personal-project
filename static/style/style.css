@@ -18,23 +18,3 @@ a:hover {
     color: rgb(4, 135, 211);
   }
 
-#grid{
-    display: grid;
-    grid-template-columns: 5em 5em 5em ;
-    grid-template-rows: 5em 5em 5em;
-}
-.cell{
-    border: 1px solid black;
-    padding: 1em;
-    background-color: rgb(255, 255, 255);
-}
-
-.red{
-    background-image: url("https://media.istockphoto.com/vectors/red-handwritten-brush-isolated-vector-id620376638?k=6&m=620376638&s=612x612&w=0&h=Xhm7hMklsFHhnPYOE7Bz7ZxLjN4xOijqyIZkXgDUrao=");
-    background-size: cover;
-}
-
-.blue{
-    background-image: url("https://i.pinimg.com/736x/48/41/9e/48419e1d38b4fcf8c887d9f38aba742a.jpg");
-    background-size: cover;
-}
