@@ -1,3 +1,5 @@
+import {Gato} from "./gato.js"
+
 document.addEventListener('DOMContentLoaded', () => {
-    null
+    let gato = new Gato(3)
 })

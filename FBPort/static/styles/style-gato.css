@@ -1,3 +1,10 @@
 .cell {
     border: 1px solid black;
 }
+
+.player-1 {
+    background-color: red;
+}
+.player-2 {
+    background-color: blue;
+}
