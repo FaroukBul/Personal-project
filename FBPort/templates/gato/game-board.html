@@ -1,7 +1,7 @@
-<table class="gato-grid">
-    {% for row in range(grid_length) %}
+<table class="gato-game-board">
+    {% for row in range(game_board_length) %}
     <tr>
-        {% for col in range(grid_length) %}
+        {% for col in range(game_board_length) %}
         <td class="cell" id="{{ row }},{{ col }}">
             pene
         </td>

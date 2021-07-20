@@ -11,6 +11,6 @@ def game():
     
     return render_template(
         "gato/game.html",
-        grid_length=3,
+        game_board_length=3,
         range=range
     )
