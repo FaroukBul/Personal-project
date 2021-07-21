@@ -5,6 +5,7 @@ class Gato {
     constructor(gameBoardLength) {
         this.gameBoardLength = gameBoardLength
         this.currentPlayer = 1
+        this.tie = false
         this.winner = false
         this.gameBoard = [
             [0, 0, 0],
@@ -17,8 +18,8 @@ class Gato {
         this.changeCellColor(cell)
         this.registerCell(cell)
         this.checkForWinner()
-        if (this.winner) {
-            console.log("won")
+        if(this.winner || this.tie){
+            this.displayResult()
         }
         this.changeCurrentPlayer()
     }
@@ -49,12 +50,24 @@ class Gato {
         let winnerChecker = new WinnerChecker(this)
         this.winner = winnerChecker.checkForWinner()
     }
+
+    displayResult(){
+        let resultTitle = document.getElementById('result')
+        if(this.tie){
+            resultTitle.innerHTML = "Tie"
+            resultTitle.style.color = "red"  
+        } else {
+            resultTitle.innerHTML = this.currentPlayer + " Wins"
+            resultTitle.style.color = "goldenrod"
+        }
+    }
 }
 
 
 class WinnerChecker {
 
     constructor (gato) {
+        this.gato = gato
         this.winner = gato.winner
         this.gameBoardLength = gato.gameBoardLength
         this.currentPlayer = gato.currentPlayer
@@ -66,8 +79,22 @@ class WinnerChecker {
         if (!this.winner) {
             this.checkForDiagonalWin()
         }
+        if(!this.winner){
+            this.checkForTie()
+        }
 
         return this.winner
+    }
+
+    checkForTie() {
+        let emptyCells = 0
+        this.gameBoard.forEach(line => {
+            if(line.indexOf(0) > -1){emptyCells++}
+        })
+
+        if(emptyCells == 0){
+            this.gato.tie = true
+        }
     }
 
     checkForDiagonalWin () {

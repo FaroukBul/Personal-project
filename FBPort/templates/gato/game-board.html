@@ -1,11 +1,13 @@
-<table class="gato-game-board">
-    {% for row in range(game_board_length) %}
-    <tr>
-        {% for col in range(game_board_length) %}
-        <td class="cell" id="{{ row }},{{ col }}">
-            pene
-        </td>
+<div>
+    <h2 id="result">Gato</h2>
+    <table class="gato-game-board">
+        {% for row in range(game_board_length) %}
+        <tr>
+            {% for col in range(game_board_length) %}
+            <td class="cell" id="{{ row }},{{ col }}">
+            </td>
+            {% endfor %}
+        </tr>
         {% endfor %}
-    </tr>
-    {% endfor %}
-</table>
+    </table>
+</div>

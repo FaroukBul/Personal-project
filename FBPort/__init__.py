@@ -27,4 +27,6 @@ def create_app(test_config=None):
     from .views import gato
     app.register_blueprint(gato.bp)
 
+    from .views import sudoku
+    app.register_blueprint(sudoku.bp)
     return app

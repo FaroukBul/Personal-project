@@ -1,5 +1,13 @@
+table {
+    border-spacing: 0em;
+    border-collapse: collapse;
+    margin-top: 2em;
+}
 .cell {
     border: 1px solid black;
+    width: 5em;
+    height: 5em;
+    margin: none;
 }
 
 .player-1 {
