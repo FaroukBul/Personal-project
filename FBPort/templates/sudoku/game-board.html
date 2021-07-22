@@ -1,12 +1,10 @@
 <div class="game-board">
-{% for big_square in range(0, 9) %}
-<div class="big-square" id="{{ big_square }}">
-    {% for small_square in range(0, 9) %}
-    <div class="small-square" id="{{ big_square }}{{ small_square }}">
-
+{% for row in range(0, 10) %}
+{% for column in range(0, 10) %}
+    <div class="small-square" id="{{ row }}{{ column }}">
+        
     </div>
-    {% endfor %}
-</div>
+{% endfor %}
 {% endfor %}
 </div>
     

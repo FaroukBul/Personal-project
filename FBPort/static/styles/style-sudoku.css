@@ -1,16 +1,13 @@
 .game-board {
     display: grid;
-    grid-template-columns: repeat(3, 9em);
-    grid-template-rows: repeat(3, 9em);
+    grid-template-columns: repeat(9, 3em);
+    grid-template-rows: repeat(9, 3em);
     border: 1px solid black;
     margin-top: 2em;
     padding: 2em;
 }
 
 .big-square {
-    display: grid;
-    grid-template-columns: repeat(3, 3em);
-    grid-template-rows: repeat(3, 3em);
     border: 1px solid red;
 }
 
