@@ -1,9 +1,8 @@
 
-let squares = document.getElementsByClassName('small_square')
-enumareteSquares(squares)
 
-function enumareteSquares(squares){
-    lastSquareId = parseInt(squares[squares.length -1].id)
+enumareteSquares()
+
+function enumareteSquares(){
    for(row=0; row <= 9; row++){
        big_square = 0
        for(col=0; col <= 9; col++){
