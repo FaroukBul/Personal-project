@@ -1,4 +1,5 @@
 
+
 function enumareteSquares(){
     let big_square_row = 1
     let square_end_row = 1
@@ -29,7 +30,7 @@ function enumareteSquares(){
  }
 
 
-class CreateSudoku{
+class Sudoku{
 
     constructor(){
         this.randomNumber = null
@@ -42,15 +43,13 @@ class CreateSudoku{
     }
 
     createGrid(){
-        for(let i=0; i <= 9; i++){
+        for(let i=0; i <= 20; i++){
             let all_taken = document.getElementsByClassName("taken")
-            console.log(all_taken, i)
-            if(all_taken.length <= 9){
+            if(all_taken.length <= 20){
                 this.randomNumber = this.generateRandomNumber(1, 10)
                 this.randomPosition = this.generateRandomPosition()
                 console.log(this.randomNumber, this.randomPosition)
                 if(this.checkForValidPosition()){
-                    console.log("test if statement in createGrid")
                     this.numberedSquare()
                 } 
             }
@@ -60,7 +59,7 @@ class CreateSudoku{
     generateRandomPosition(){
         this.generateRandomCuadrantNumber()
         this.generateRandomGridNumber()
-        return `cuandrant_y${this.cuadrantY} cuadrant_x${this.cuadrantX} y${this.y} x${this.y}`
+        return `cuandrant_y${this.cuadrantY} cuadrant_x${this.cuadrantX} y${this.y} x${this.x}`
     }
 
     checkForValidPosition(){
@@ -115,39 +114,38 @@ class CreateSudoku{
     generateRandomCuadrantNumber() {
         this.cuadrantY = this.generateRandomNumber(1, 4)
         this.cuadrantX = this.generateRandomNumber(1, 4)
+        console.log(this.cuadrantX, this.cuadrantY, "cuadrant numbers")
      }
 
     generateRandomGridNumber() {
         switch(this.cuadrantY){
             case 1:
-                this.y = this.generateRandomNumber(1, 3)
+                this.y = this.generateRandomNumber(1, 4)
                 break;
             case 2:
-                this.y = this.generateRandomNumber(4, 6)
+                this.y = this.generateRandomNumber(4, 7)
                 break;
             case 3:
-                this.y = this.generateRandomNumber(7, 9)
+                this.y = this.generateRandomNumber(7, 10)
                 break;
         }
 
         switch(this.cuadrantX){
             case 1:
-                this.x = this.generateRandomNumber(1, 3)
+                this.x = this.generateRandomNumber(1, 4)
                 break;
             case 2:
-                this.x = this.generateRandomNumber(4, 6)
+                this.x = this.generateRandomNumber(4, 7)
                 break;
             case 3:
-                this.x = this.generateRandomNumber(7, 9)
+                this.x = this.generateRandomNumber(7, 10)
                 break;
         }
-       
-        
     }
 
     generateRandomNumber(min, max){
-        return Math.floor(Math.random() * (max - min) + min)
+        return Math.floor(Math.random() * (max - min)) + min
      }
 }
 
-export {CreateSudoku, enumareteSquares}
+export {Sudoku, enumareteSquares}

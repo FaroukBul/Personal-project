@@ -1,9 +1,9 @@
 import {Gato} from "./gato.js"
-import {CreateSudoku, enumareteSquares} from "./sudoku.js"
+import {Sudoku, enumareteSquares} from "./sudoku.js"
 
 document.addEventListener('DOMContentLoaded', () => {
     enumareteSquares()
-    let new_sudoku = new CreateSudoku()
+    let new_sudoku = new Sudoku()
     new_sudoku.createGrid()
     
     let gato = new Gato(3)
