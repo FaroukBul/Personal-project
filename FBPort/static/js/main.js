@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     enumareteSquares()
     let new_sudoku = new CreateSudoku()
     new_sudoku.createGrid()
-    console.log("this")
+    
     let gato = new Gato(3)
     window.onclick = event => {
         let element = event.target
