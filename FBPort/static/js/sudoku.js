@@ -8,7 +8,7 @@ function enumareteSquares(){
         let square_end_col = 1
         for(let col=1; col <= 9; col++) {
             let small_square = document.getElementById(`${row}${col}`)
-            small_square.className = `cuandrant_y${big_square_row} cuadrant_x${big_square_col} y${row} x${col}`
+            small_square.className = `cuadrant_y${big_square_row} cuadrant_x${big_square_col} y${row} x${col}`
             if(col % 3 == 0){ 
                 if(square_end_col == 3){
                     big_square_col = 1
@@ -43,15 +43,15 @@ class Sudoku{
     }
 
     createGrid(){
-        for(let i=0; i <= 20; i++){
+        for(let index=0; index <= 30; index++){
             let all_taken = document.getElementsByClassName("taken")
-            if(all_taken.length <= 20){
+            if(all_taken.length <= 30){
                 this.randomNumber = this.generateRandomNumber(1, 10)
                 this.randomPosition = this.generateRandomPosition()
                 console.log(this.randomNumber, this.randomPosition)
                 if(this.checkForValidPosition()){
                     this.numberedSquare()
-                } 
+                } else index--
             }
         }
     }
@@ -59,54 +59,49 @@ class Sudoku{
     generateRandomPosition(){
         this.generateRandomCuadrantNumber()
         this.generateRandomGridNumber()
-        return `cuandrant_y${this.cuadrantY} cuadrant_x${this.cuadrantX} y${this.y} x${this.x}`
+        return `cuadrant_y${this.cuadrantY} cuadrant_x${this.cuadrantX} y${this.y} x${this.x}`
     }
 
     checkForValidPosition(){
-        if(this.validPosition()){
-            return true
+        if(this.checkForEmtpyPosition()){
+            if(this.checkForValidCoordinate()){
+                return true
+            }
         }
     }
 
-    validPosition(){
+    checkForEmtpyPosition(){
         let positionClass = this.randomPosition + "taken"
         let position = document.getElementsByClassName(positionClass)[0]
-        console.log(position, this.randomPosition)
         if (position == undefined){
             return true
         } 
     }
 
-    takenRow(){
-        row_number = this.getNumber("row")
-        row = document.getElementsByClassName(row_number)
-        for(let index=0; index<= row.length; index++){
-            if(row[index].innderHTML == this.randomNumber){
-                return true
-            }
+    checkForValidCoordinate(){
+        let classCoordinates = [
+            `cuadrant_y${this.cuadrantY}`,
+            `cuadrant_x${this.cuadrantX}`,
+            `y${this.y}`,
+            `x${this.x}`
+        ]
+        console.log("valid coordinates")
+        for(let index=0; index <= 3; index++){
+            let positions = document.getElementsByClassName(classCoordinates[index])
+            console.log(positions, "repeated")
+            for(let square=0; square < positions.length; square++){
+                if(positions[square].innerHTML == this.randomNumber){
+                    return false
+                }
+            }  
         }
-    } 
 
-    getNumber(coordinateGroup){
-        if(coordinateGroup == "cuadrant"){
-            coordinates = this.randomPosition.split(" ")
-            let cuadrant_y = coordinates[0]
-            let cuadrant_x = coordinates[1]
-            return `${cuadrant_y} ${cuadrant_x}`
-        }
-        if(coordinateGroup == "row"){
-            return this.randomPosition.split(" ")[2]
-        }
-        if(coordinateGroup == "col"){
-            return this.randomPosition.split(" ")[3]
-        }
+        return true
     }
 
     numberedSquare() {
-        console.log("test numberedSquare")
         this.testRandomNumber.push(this.randomNumber)
         let square = document.getElementsByClassName(this.randomPosition)[0]
-        console.log(square, "test-square")
         square.classList.add("taken")
         square.innerHTML = this.randomNumber
     }   
@@ -114,7 +109,6 @@ class Sudoku{
     generateRandomCuadrantNumber() {
         this.cuadrantY = this.generateRandomNumber(1, 4)
         this.cuadrantX = this.generateRandomNumber(1, 4)
-        console.log(this.cuadrantX, this.cuadrantY, "cuadrant numbers")
      }
 
     generateRandomGridNumber() {
