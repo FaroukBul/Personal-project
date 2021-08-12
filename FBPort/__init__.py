@@ -21,6 +21,12 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    from .commands import database
+    app.cli.add_command(database.init_db_command)
+
+    from .models import db
+    db.init_app(app)
+
     from .views import home
     app.register_blueprint(home.bp)
 
@@ -29,4 +35,7 @@ def create_app(test_config=None):
 
     from .views import sudoku
     app.register_blueprint(sudoku.bp)
+
+    from .views import todo
+    app.register_blueprint(todo.bp)
     return app
