@@ -10,5 +10,7 @@ def init_db_command():
     click.echo("Initialized database")
 
 
-
+def init_db():
+    db.drop_all()
+    db.create_all()
 
