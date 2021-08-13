@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+
 {% block title %}Todo{% endblock %}
 
 {% block content %}
@@ -7,5 +9,6 @@
         <input type="date" name="due_datetime">
         <input type="submit">
     </form>
+    {% include "todo/todos.html" %}
 </div>
 {% endblock %}

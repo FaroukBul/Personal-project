@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/main-style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style-gato.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style-sudoku.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style-todo.css') }}">
     <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
 </head>
 
@@ -17,5 +18,8 @@
     <section>
         {% block content %}{% endblock %}
     </section>
+    {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+    {% endfor %}
 </body>
 </html>

@@ -1,0 +1,23 @@
+.todo-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 2em
+}
+
+.todo-box{
+    display: flex;
+    text-align: center;
+    border: 1px solid black;
+    margin: 1em;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+}
+
+.todo-boxes-container {
+    display: flex;
+    justify-content: center;
+}
