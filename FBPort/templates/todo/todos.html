@@ -1,10 +1,10 @@
 <div class="todo-boxes-container">
     {% for todo in todos %}
     <div class="todo-box">
-        <p>
+        <div class="todo-activity">
             {{ todo.activity}}
-        </p>
-        <div>
+        </div>
+        <div class="todo-duedate">
             {{ todo.due_datetime }}
         </div>
         <a href="{{url_for('todo.delete', todo_id=todo.id)}}">
