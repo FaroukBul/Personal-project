@@ -7,7 +7,7 @@
 
 .todo-box{
     display: flex;
-    text-align: center;
+    justify-content: center;
     border: 1px solid black;
     margin: 1em;
 }
@@ -20,4 +20,9 @@ form {
 .todo-boxes-container {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+}
+
+.todo-boxes-container div {
+    margin: 1em;
 }
