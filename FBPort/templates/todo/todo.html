@@ -6,7 +6,8 @@
 <div class="todo-container">
     <form method="post">
         <input type="text" name="activity">
-        <input type="date" name="due_datetime">
+        <input type="datetime-local" name="due_datetime">
+        <input type="number" name="days" value="Repeat">
         <input type="submit">
     </form>
     {% include "todo/todos.html" %}
