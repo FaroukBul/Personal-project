@@ -10,9 +10,9 @@
         <a href="{{url_for('todo.delete', todo_id=todo.id)}}">
             Delete
         </a>
-        {% if todo.status == "expired" %}
+        {% if todo.status %}
         <div class="expired {{ todo.id }}">
-            "Expired"
+            {{  todo.status }}
         </div>
         {% endif %}
     </div>

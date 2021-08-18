@@ -26,7 +26,7 @@ def todo():
                 days=request.form["days"]
             )
             error = todo.request.add()
-            todo.repeat()
+            todo.repeat.next_date()
             if not error:
                 return redirect(
                     url_for("todo.todo")
