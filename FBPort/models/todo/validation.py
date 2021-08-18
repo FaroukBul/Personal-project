@@ -1,3 +1,4 @@
+from datetime import datetime
 from . import Todo
 
 
@@ -9,6 +10,8 @@ class TodoValidation:
 
     def validate(self):
         self.validate_empty_values()
+        if not self.error:
+            self.validate_date()
 
         return self.error
 
@@ -17,3 +20,7 @@ class TodoValidation:
             self.error = "You have to write something to do"
         
         return self.error
+    
+    def validate_date(self):
+        if self.todo.due_datetime < datetime.now():
+            self.error = "You can't add to-dos for previous dates"
