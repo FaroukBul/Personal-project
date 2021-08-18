@@ -30,6 +30,7 @@ class ToDos{
         let today = new Date()
         let todayAsNumber = Date.parse(today)
         let dueDateAsNumber = Date.parse(date)
+        if(!dateElement.children.classList.contains(expired))
         if(dueDateAsNumber < todayAsNumber){
             var expiredDiv = document.getElementsByClassName(`expired ${element}`)
             if(expiredDiv.length == 0){
@@ -40,9 +41,9 @@ class ToDos{
 
     expiredDate(dateElement, element){
         let parentElement = dateElement.parentElement
-        let div = document.createElement("div")
+        let div = document.createElement("div") 
         div.setAttribute("class", `expired ${element}`)
-        div.innerHTML = "EXPIRED"
+        div.innerHTML = "Expired"
         parentElement.appendChild(div)
     }
 
