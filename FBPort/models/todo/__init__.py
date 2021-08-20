@@ -1,4 +1,5 @@
-from datetime import datetime
+import math
+from datetime import datetime, timedelta
 from sqlalchemy import (
     Column, Integer, Text,
     String, DateTime
@@ -10,6 +11,7 @@ class Todo(db.Model, SessionCommit):
     id = Column(Integer, primary_key=True)
     activity = Column(Text, nullable=False)
     due_datetime = Column(DateTime, nullable=True)
+    first_datetime = Column(DateTime, nullable=True)
     status = Column(String(25), nullable=True)
     days = Column(Integer, nullable=True)
     next_datetime = Column(DateTime, nullable=True, default=None)
@@ -19,9 +21,11 @@ class Todo(db.Model, SessionCommit):
         return Todo.query.get(id)
     
     def check_for_expiration(self):
-        if self.due_datetime <= datetime.now():
-            self.status = "expired"
-        self.repeat.next_date()
+        if self.next_datetime is None:
+            self.repeat.set_next_date()
+        if self.due_datetime < datetime.now():
+            self.repeat.next_date() 
+            self.update()
     
     @property
     def validation(self):
@@ -37,3 +41,5 @@ class Todo(db.Model, SessionCommit):
     def repeat(self):
         from .repeat import TodoRepeat
         return TodoRepeat(self)
+
+    
