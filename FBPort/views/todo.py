@@ -23,11 +23,12 @@ def todo():
             todo = Todo(
                 activity=request.form["activity"],
                 due_datetime=datetime_obj,
+                first_datetime=datetime_obj,
                 days=request.form["days"]
             )
             error = todo.request.add()
-            todo.repeat.next_date()
             if not error:
+                todo.repeat.next_date()
                 return redirect(
                     url_for("todo.todo")
                 )
@@ -43,6 +44,29 @@ def check_for_expired_date(todos):
     for todo in todos:
         todo.check_for_expiration()
 
+def get_clicked_btn_id():
+    todos = Todo.query.all()
+    todo_num = 1
+    for todo in todos:
+        if request.form['done-btn'] == f'{todo_num}':
+            return todo_num
+        todo_num += 1
+    
+    return None
+
+@bp.route("/done", methods=("POST","GET"))
+def done():
+    if request.method == "POST":
+        clicked_btn_id = get_clicked_btn_id()
+        if clicked_btn_id:
+            todo = Todo.get(clicked_btn_id)
+            todo.status = "Done"
+            todo.update()
+            print(todo.status, clicked_btn_id)
+
+    return redirect(
+            url_for("todo.todo")
+        )
 
 @bp.route("/delete/<int:todo_id>")
 def delete(todo_id):
