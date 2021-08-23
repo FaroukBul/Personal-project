@@ -16,12 +16,4 @@ document.addEventListener('DOMContentLoaded', () => {
             gato.markCell(element)
         }
     }
-
-    
-
-
-
-
-     
-
 })

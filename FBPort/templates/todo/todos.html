@@ -11,16 +11,14 @@
             Delete
         </a>
         {% if todo.status %}
-        <div class="expired {{ todo.id }}">
-            {{  todo.status }}
-        </div>
+        <div class="status {{ todo.id }}">{{  todo.status }}</div>
         {% endif %}
         <div>
             Next datetime: {{todo.next_datetime}}
         </div>
         <form action="{{ url_for('todo.done') }}" method="post">
             <div class="buttons-square">
-                <input type="submit" name="done-btn" value="{{ todo.id }}" id="{{ todo.id }}">
+                <input type="submit" name="done-btn" class="done-btn" value="{{ todo.id }}" id="{{ todo.id }}">
             </div>
         </form>
     </div>
