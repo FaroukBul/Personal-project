@@ -44,6 +44,7 @@ class ToDos{
         let div = document.createElement("div") 
         div.setAttribute("class", `expired ${element}`)
         div.innerHTML = "Expired"
+        parentElement.style.backgroundColor = "red"
         parentElement.appendChild(div)
     }
 
@@ -53,8 +54,8 @@ class ToDos{
             let statusBox = statusBoxes[element]
             let status = statusBox.innerHTML
             let todoBox = statusBox.parentElement
-            console.log(status)
-            if(status == "Done"){
+            let expired = document.getElementsByClassName(`expired ${element}`)
+            if(status == "Done" && expired.length == 0){
                 this.done(todoBox)
                 console.log(todoBox, status)
             }
